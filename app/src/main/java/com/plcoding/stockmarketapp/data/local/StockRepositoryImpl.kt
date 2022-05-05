@@ -43,9 +43,11 @@ class StockRepositoryImpl @Inject constructor(
                 val response = api.getListings()
                val csvReader = CSVReader(InputStreamReader(response.byteStream()))
            }catch (e: IOException){
-
+               e.printStackTrace()
+               emit(Resources.Error("Couldn't load data"))
            }catch (e: HttpException){
-
+                e.printStackTrace()
+               emit(Resources.Error("Couldn't load data"))
            }
 
        }
